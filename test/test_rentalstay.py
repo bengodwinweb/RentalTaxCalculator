@@ -5,6 +5,43 @@ from taxcalculator.rentalstay import RentalStay
 
 
 class TestRentalStay(unittest.TestCase):
+    def test_getIdentifier(self):
+        stay = RentalStay()
+        stay.source = 'AirBnb'
+        stay.id = 1
+        self.assertEqual('AirBnb/00001', stay.get_identifier())
+
+    def test_getGross(self):
+        stay = RentalStay()
+        stay.bookingFee = 111.11
+        stay.payout = 222.22
+        self.assertEqual(333.33, stay.get_gross())
+
+    def test_parseLine(self):
+        row = {
+            'Source': 'Vrbo',
+            'Id': '12345',
+            'Renter': 'Johnson',
+            'Transaction Date': '2021-04-22',
+            'Start Date': '2021-03-31',
+            'End Date': '2021-04-02',
+            'Payout': '123.45',
+            'Booking Fee': '11.69',
+        }
+        stay = RentalStay()
+        stay.parse_line(row)
+        self.assertEqual('Vrbo', stay.source, 'Source')
+        self.assertEqual(12345, stay.id, 'Id')
+        self.assertEqual('Vrbo/12345', stay.get_identifier(), 'Identifier')
+        self.assertEqual('Johnson', stay.renter, 'Renter')
+        self.assertEqual(date(2021, 4, 22), stay.transactionDate, 'Transaction Date')
+        self.assertEqual(2, stay.get_quarter(), 'Quarter')
+        self.assertEqual(date(2021, 3, 31), stay.startDate, 'Start Date')
+        self.assertEqual(date(2021, 4, 2), stay.endDate, 'End Date')
+        self.assertAlmostEqual(123.45, stay.payout, 7, 'Payout')
+        self.assertAlmostEqual(11.69, stay.bookingFee, 7, 'Booking Fee')
+        self.assertAlmostEqual(135.14, stay.get_gross(), 7, 'Gross')
+
     def test_GetQuarterJan(self):
         stay = RentalStay()
         stay.transactionDate = date(2021, 1, 1)
@@ -66,7 +103,3 @@ class TestRentalStay(unittest.TestCase):
         stay = RentalStay()
         stay.transactionDate = date(2021, 12, 1)
         self.assertEqual(4, stay.get_quarter())
-
-
-if __name__ == '__main__':
-    TestRentalStay().test_GetQuarterJan()

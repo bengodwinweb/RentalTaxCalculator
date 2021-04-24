@@ -1,4 +1,4 @@
-from rentalstay import RentalStay
+from taxcalculator.rentalstay import RentalStay
 
 def split_line(line):
     """
