@@ -1,4 +1,5 @@
 from datetime import date
+from datetime import timedelta
 
 
 class RentalStay:
@@ -20,6 +21,10 @@ class RentalStay:
 
     def get_quarter(self):
         return ((self.transactionDate.month - 1) // 3) + 1
+
+    def nights_booked(self):
+        delta = self.endDate - self.startDate
+        return delta.days
 
     def parse_line(self, row):
         self.source = row["Source"]
