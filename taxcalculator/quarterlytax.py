@@ -1,8 +1,9 @@
+import json
 
 from taxcalculator.config import Config
 
-class QuarterlyTax:
 
+class QuarterlyTax:
     def __init__(self, quarter_num):
         self.quarterNum = quarter_num
         self.nightsBooked = 0

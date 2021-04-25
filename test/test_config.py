@@ -7,7 +7,7 @@ class TestConfig(TestCase):
     def test_parse_file(self):
         fname = 'files' + os.path.sep + 'config_test.json'
         Config.parse_file(fname)
-        self.assertEqual(2012, Config.YEAR)
+        self.assertEqual(2021, Config.YEAR)
         self.assertAlmostEqual(0.04, Config.OCCUPANCY_TAX)
         self.assertAlmostEqual(0.09, Config.SALES_TAX)
         self.assertEqual(True, Config.Q1.salesTaxPaidOnTime)
