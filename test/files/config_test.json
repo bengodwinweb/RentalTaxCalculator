@@ -1,0 +1,29 @@
+{
+	"Year": 2012,
+	"OccupancyTax": 0.04,
+	"SalesTax": 0.09,
+	"Quarter1": {
+		"SalesTaxPaidOnTime": true,
+		"OccupancyTaxPaidOnTime": true,
+		"SalesTaxOnTimeDiscount": 0.03,
+		"OccupancyTaxOnTimeDiscount": 0.03
+	},
+	"Quarter2": {
+		"SalesTaxPaidOnTime": false,
+		"OccupancyTaxPaidOnTime": true,
+		"SalesTaxOnTimeDiscount": 0.03,
+		"OccupancyTaxOnTimeDiscount": 0.03
+	},
+	"Quarter3": {
+		"SalesTaxPaidOnTime": true,
+		"OccupancyTaxPaidOnTime": false,
+		"SalesTaxOnTimeDiscount": 0.03,
+		"OccupancyTaxOnTimeDiscount": 0.03
+	},
+	"Quarter4": {
+		"SalesTaxPaidOnTime": false,
+		"OccupancyTaxPaidOnTime": false,
+		"SalesTaxOnTimeDiscount": 0.05,
+		"OccupancyTaxOnTimeDiscount": 0.06
+	}
+}

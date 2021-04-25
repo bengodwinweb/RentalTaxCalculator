@@ -1,15 +1,10 @@
 
+from taxcalculator.config import Config
 
 class QuarterlyTax:
-    SALES_TAX = 0.07
-    OCCUPANCY_TAX = 0.05
-    SALES_TAX_ON_TIME_DISCOUNT = 0.03
-    OCCUPANCY_TAX_ON_TIME_DISCOUNT = 0.03
 
-    def __init__(self, quarter_num, sales_tax_on_time=True, occupancy_tax_on_time=True):
+    def __init__(self, quarter_num):
         self.quarterNum = quarter_num
-        self.salesTaxPaidOnTime = sales_tax_on_time
-        self.occupancyTaxPaidOnTime = occupancy_tax_on_time
         self.nightsBooked = 0
         self.bookingFees = 0
         self.payout = 0
@@ -28,16 +23,17 @@ class QuarterlyTax:
                 self.nightsBooked += stay.nights_booked()
 
         self.gross = self.bookingFees + self.payout
-        self.taxableIncome = QuarterlyTax.calc_taxable_income(self.gross, QuarterlyTax.SALES_TAX, QuarterlyTax.OCCUPANCY_TAX)
-        self.salesTaxCollected = self.taxableIncome * QuarterlyTax.SALES_TAX
-        self.occupancyTaxCollected = self.taxableIncome * QuarterlyTax.OCCUPANCY_TAX
+        self.taxableIncome = QuarterlyTax.calc_taxable_income(self.gross, Config.SALES_TAX, Config.OCCUPANCY_TAX)
+        self.salesTaxCollected = self.taxableIncome * Config.SALES_TAX
+        self.occupancyTaxCollected = self.taxableIncome * Config.OCCUPANCY_TAX
         self.salesTaxOwed = self.salesTaxCollected
         self.occupancyTaxOwed = self.occupancyTaxCollected
 
-        if self.salesTaxPaidOnTime:
-            self.salesTaxOwed = self.salesTaxCollected - (self.salesTaxCollected * QuarterlyTax.SALES_TAX_ON_TIME_DISCOUNT)
-        if self.occupancyTaxPaidOnTime:
-            self.occupancyTaxOwed = self.occupancyTaxCollected - (self.occupancyTaxCollected * QuarterlyTax.OCCUPANCY_TAX_ON_TIME_DISCOUNT)
+        q_config = Config.get_quarter(self.quarterNum)
+        if q_config.salesTaxPaidOnTime:
+            self.salesTaxOwed = self.salesTaxCollected - (self.salesTaxCollected * q_config.salesTaxOnTimeDiscount)
+        if q_config.occupancyTaxPaidOnTime:
+            self.occupancyTaxOwed = self.occupancyTaxCollected - (self.occupancyTaxCollected * q_config.occupancyTaxOnTimeDiscount)
 
 
     @staticmethod
