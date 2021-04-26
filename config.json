@@ -23,7 +23,7 @@
 	"Quarter4": {
 		"SalesTaxPaidOnTime": true,
 		"OccupancyTaxPaidOnTime": true,
-		"SalesTaxOnTimeDiscount": 0.05,
-		"OccupancyTaxOnTimeDiscount": 0.06
+		"SalesTaxOnTimeDiscount": 0.03,
+		"OccupancyTaxOnTimeDiscount": 0.03
 	}
 }

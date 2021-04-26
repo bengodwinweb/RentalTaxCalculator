@@ -76,6 +76,8 @@ def make_pdf(fname: str, yearly_tax: YearlyTax):
     @param yearly_tax: calculated tax
     @type yearly_tax: YearlyTax
     """
+    print('Creating PDF: \"{}\"'.format(fname))
+
     if os.path.exists(fname):
         os.remove(fname)
 
