@@ -9,6 +9,7 @@ class YearlyTax:
         self.quarter2 = QuarterlyTax(2)
         self.quarter3 = QuarterlyTax(3)
         self.quarter4 = QuarterlyTax(4)
+        self.year = Config.YEAR
         self.gross = 0
         self.taxableIncome = 0
         self.nightsBooked = 0
